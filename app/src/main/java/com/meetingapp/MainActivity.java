@@ -21,13 +21,37 @@ public class MainActivity extends AppCompatActivity {
         Button profile = (Button) findViewById(R.id.Profile);
         Button contacts = (Button) findViewById(R.id.Contacts);
         Button createNewMeeting = (Button) findViewById(R.id.CreateMeeting);
-        Button meetingList = (Button) findViewById(R.id.MeetingList);
+        Button ScheduledMeetings = (Button) findViewById(R.id.MeetingList);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
                 MainActivity.this.startActivity(profileIntent);
+            }
+        });
+
+        contacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateMeetingActivity.class);
+                MainActivity.this.startActivity(createNewMeetingIntent);
+            }
+        });
+
+        ScheduledMeetings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent scheduledMeetingsIntent = new Intent(MainActivity.this, ScheduledMeetingsActivity.class);
+                MainActivity.this.startActivity(scheduledMeetingsIntent);
+            }
+        });
+
+        createNewMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateMeetingActivity.class);
+                MainActivity.this.startActivity(createNewMeetingIntent);
             }
         });
     }
