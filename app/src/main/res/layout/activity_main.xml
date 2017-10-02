@@ -6,13 +6,43 @@
     android:layout_height="match_parent"
     tools:context="com.meetingapp.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="8dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
+                android:text="Profile"
+                android:id="@+id/Profile"/>
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
+                android:text="Contacts"
+                android:id="@+id/Contacts"
+                app:layout_constraintTop_toBottomOf="@+id/Profile"/>
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
+                android:text="Scheduled Meetings"
+                android:id="@+id/MeetingList"
+                app:layout_constraintTop_toBottomOf="@id/Contacts"/>
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
+                android:text="Add New Meeting"
+                android:id="@+id/CreateMeeting"
+                app:layout_constraintTop_toBottomOf="@id/MeetingList"/>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
