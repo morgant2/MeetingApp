@@ -1,4 +1,4 @@
-package com.meetingapp;
+package com.meetingapp.BusinessObjects;
 
 import java.util.Date;
 

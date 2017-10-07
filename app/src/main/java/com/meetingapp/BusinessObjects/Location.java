@@ -1,4 +1,4 @@
-package com.meetingapp;
+package com.meetingapp.BusinessObjects;
 
 public class Location
 {

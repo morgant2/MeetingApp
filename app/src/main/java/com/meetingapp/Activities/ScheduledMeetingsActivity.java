@@ -1,7 +1,9 @@
-package com.meetingapp;
+package com.meetingapp.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.meetingapp.R;
 
 public class ScheduledMeetingsActivity extends AppCompatActivity {
 
