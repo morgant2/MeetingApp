@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meetingapp.Activities.CreateMeetingActivity">
+    tools:context="com.meetingapp.Activities.CreateNewUserActivity">
 
     <ScrollView
         android:layout_width="0dp"
@@ -40,8 +40,7 @@
                 android:id="@+id/username"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
-                android:hint="@string/lblUsername"
-                android:inputType="textEmailAddress"/>
+                android:hint="@string/lblUsername"/>
 
             <EditText
                 android:layout_width="match_parent"
