@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.meetingapp.BusinessObjects.Location;
@@ -19,14 +21,14 @@ public class CreateNewUserActivity extends AppCompatActivity {
     private User newUser = null;
     Location userLocation = null;
 
-    private EditText etFirstName = null;
-    private EditText etLastName = null;
-    private EditText etUsername = null;
-    private EditText etAddress = null;
-    private EditText etZipCode = null;
-    private EditText etCity = null;
-    private EditText etState = null;
-    EditText [] etFields = null;
+    private View etFirstName = null;
+    private View etLastName = null;
+    private View etUsername = null;
+    private View etAddress = null;
+    private View etZipCode = null;
+    private View etCity = null;
+    private View etState = null;
+    View [] etFields = null;
 
     Button btnCreateUser = null;
 
@@ -46,8 +48,8 @@ public class CreateNewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(isFormFilled())
                 {
-                    userLocation = new Location(etAddress.getText().toString(), etCity.getText().toString(), etState.getText().toString(), etZipCode.getText().toString());
-                    newUser = new User(etFirstName.getText().toString(), etLastName.getText().toString(), etUsername.getText().toString(), userLocation);
+                    userLocation = new Location(((EditText)etAddress).getText().toString(), ((EditText)etCity).getText().toString(), ((Spinner)etState).getSelectedItem().toString(), ((EditText)etZipCode).getText().toString());
+                    newUser = new User(((EditText)etFirstName).getText().toString(), ((EditText)etLastName).getText().toString(), ((EditText)etUsername).getText().toString(), userLocation);
 
                     Context context = getApplicationContext();
                     String msg = constructToasterMsg();
@@ -72,24 +74,43 @@ public class CreateNewUserActivity extends AppCompatActivity {
     }
 
     private void createTextEventListener() {
-        for(EditText et : etFields)
+        for(View view : etFields)
         {
-            et.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    toggleButtonEnabledState();
-                }
+            if(view instanceof EditText)
+            {
+                EditText et = (EditText) view;
+                et.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        toggleButtonEnabledState();
+                    }
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    toggleButtonEnabledState();
-                }
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        toggleButtonEnabledState();
+                    }
 
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    toggleButtonEnabledState();
-                }
-            });
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+                        toggleButtonEnabledState();
+                    }
+                });
+            }
+            else if(view instanceof Spinner)
+            {
+                Spinner spin = (Spinner) view;
+                spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        toggleButtonEnabledState();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+                        toggleButtonEnabledState();
+                    }
+                });
+            }
         }
     }
 
@@ -105,15 +126,15 @@ public class CreateNewUserActivity extends AppCompatActivity {
     }
 
     private void setETFields() {
-        etFirstName = (EditText) findViewById(R.id.firstName);
-        etLastName = (EditText) findViewById(R.id.lastName);
-        etUsername = (EditText) findViewById(R.id.username);
-        etAddress = (EditText) findViewById(R.id.address);
-        etZipCode = (EditText) findViewById(R.id.zipcode);
-        etCity = (EditText) findViewById(R.id.city);
-        etState = (EditText) findViewById(R.id.state);
+        etFirstName = findViewById(R.id.firstName);
+        etLastName =  findViewById(R.id.lastName);
+        etUsername = findViewById(R.id.username);
+        etAddress = findViewById(R.id.address);
+        etZipCode =  findViewById(R.id.zipcode);
+        etCity =  findViewById(R.id.city);
+        etState = findViewById(R.id.states);
 
-        etFields = new EditText[7];
+        etFields = new View[7];
 
         etFields[0] = etFirstName;
         etFields[1] = etLastName;
@@ -128,11 +149,22 @@ public class CreateNewUserActivity extends AppCompatActivity {
     {
         boolean isFilled = true;
 
-        for(EditText et : etFields)
+        for(View view : etFields)
         {
-            if(et.getText().length() == 0)
+            if(view instanceof EditText) {
+                EditText et = (EditText) view;
+
+                if (et.getText().length() == 0) {
+                    isFilled = false;
+                }
+            }
+            else if(view instanceof Spinner)
             {
-                isFilled = false;
+                Spinner spin = (Spinner) view;
+                if(spin.getSelectedItemPosition() < 0)
+                {
+                    isFilled = false;
+                }
             }
         }
 

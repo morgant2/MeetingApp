@@ -57,13 +57,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="parent"
                 android:hint="@string/lblCity"/>
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/state"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="parent"
-                android:hint="@string/lblState"/>
+            <Spinner
+                android:layout_width="352dp"
+                android:layout_height="48dp"
+                app:layout_constraintTop_toBottomOf="@+id/city"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:entries="@array/listOfStates"
+                android:prompt="@string/statePrompt"
+                android:id="@+id/states">
+            </Spinner>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
