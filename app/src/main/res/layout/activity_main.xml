@@ -26,9 +26,15 @@
             <Button
                 android:layout_width="352dp"
                 android:layout_height="64dp"
+                android:text="New User"
+                android:id="@+id/NewUser"
+                app:layout_constraintTop_toBottomOf="@+id/Profile"/>
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
                 android:text="Contacts"
                 android:id="@+id/Contacts"
-                app:layout_constraintTop_toBottomOf="@+id/Profile"/>
+                app:layout_constraintTop_toBottomOf="@+id/NewUser"/>
             <Button
                 android:layout_width="352dp"
                 android:layout_height="64dp"

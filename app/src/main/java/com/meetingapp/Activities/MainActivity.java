@@ -52,7 +52,15 @@ public class MainActivity extends AppCompatActivity {
         createNewMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateNewUserActivity.class);
+                Intent createNewUserIntent = new Intent(MainActivity.this, CreateNewUserActivity.class);
+                MainActivity.this.startActivity(createNewUserIntent);
+            }
+        });
+
+        createNewMeeting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateMeetingActivity.class);
                 MainActivity.this.startActivity(createNewMeetingIntent);
             }
         });
