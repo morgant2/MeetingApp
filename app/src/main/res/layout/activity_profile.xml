@@ -23,7 +23,7 @@
             android:paddingTop="20dp"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/blankProfile"/>
+            android:src="@drawable/blankprofile"/>
 
         <Button
             android:paddingTop="10dp"

@@ -4,4 +4,13 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lblName">Name</string>
+    <string name="lblUsername">Username</string>
+    <string name="lblFirstName">First Name</string>
+    <string name="lblLastName">Last Name</string>
+    <string name="lblAddress">Address</string>
+    <string name="lblState">State</string>
+    <string name="lblZipCode">Zip Code</string>
+    <string name="lblCity">City</string>
+    <string name="lblCreateButton">Create</string>
 </resources>
