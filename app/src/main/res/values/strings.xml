@@ -13,5 +13,5 @@
     <string name="lblZipCode">Zip Code</string>
     <string name="lblCity">City</string>
     <string name="lblCreateButton">Create</string>
-    <string name="title_activity_create_meeting">CreateMeetingActivity</string>
+    <string name="title_activity_create_user">New User</string>
 </resources>
