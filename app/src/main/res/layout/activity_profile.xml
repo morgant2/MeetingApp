@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@+id/usernameEditText"
                 android:text="Username: "
-                android:textColor="black" />
+                />
 
             <EditText
                 android:id="@+id/usernameEditText"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="27dp"
                 android:text="Name: "
-                android:textColor="black" />
+                 />
 
             <EditText
                 android:id="@+id/nameEditText"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="25dp"
                 android:text="Phone: "
-                android:textColor="black" />
+                 />
 
             <EditText
                 android:id="@+id/phoneNumberEditText"
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Address: "
-                android:textColor="black" />
+                 />
 
             <EditText
                 android:id="@+id/addressEditText"
@@ -126,7 +126,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:text="Update Information"
-            android:textColor="black"
+
             android:textSize="10dp" />
 
     </LinearLayout>
