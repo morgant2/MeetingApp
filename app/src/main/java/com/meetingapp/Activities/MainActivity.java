@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         Button contacts = (Button) findViewById(R.id.Contacts);
         Button createNewMeeting = (Button) findViewById(R.id.CreateMeeting);
         Button ScheduledMeetings = (Button) findViewById(R.id.MeetingList);
+        Button createNewUser = (Button) findViewById(R.id.NewUser);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         contacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateMeetingActivity.class);
+                Intent createNewMeetingIntent = new Intent(MainActivity.this, ContactsActivity.class);
                 MainActivity.this.startActivity(createNewMeetingIntent);
             }
         });
@@ -46,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent scheduledMeetingsIntent = new Intent(MainActivity.this, ScheduledMeetingsActivity.class);
                 MainActivity.this.startActivity(scheduledMeetingsIntent);
+            }
+        });
+
+        createNewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent createNewUserIntent = new Intent(MainActivity.this, CreateNewUserActivity.class);
+                MainActivity.this.startActivity(createNewUserIntent);
             }
         });
 
