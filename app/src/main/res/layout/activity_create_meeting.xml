@@ -121,7 +121,7 @@
                 <Spinner
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/etAddAttendee"
+                    android:id="@+id/spinAddAttendee"
                     android:entries="@array/listOfUsers"
                     android:prompt="@string/userPrompt"/>
                 <Button
@@ -130,14 +130,15 @@
                     android:text="Add"
                     android:id="@+id/btnAddAttendee"/>
             </LinearLayout>
-            <ListView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/lvAttendees">
-
-            </ListView>
         </LinearLayout>
 
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="234dp"
+            android:id="@+id/lvAttendees"
+            android:entries="@array/listOfUsers">
+
+        </ListView>
         </LinearLayout>
     </ScrollView>
 
