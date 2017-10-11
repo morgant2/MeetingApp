@@ -14,7 +14,17 @@
     <string name="lblCity">City</string>
     <string name="lblCreateButton">Create</string>
     <string name="title_activity_create_user">New User</string>
+    <string name="pick_time">Pick Time</string>
     <string name="statePrompt">Choose a State</string>
+    <string name="startTimeButtonName">Set Start Time</string>
+    <string name="endTimeButtonName">Set End Time</string>
+    <string name="userPrompt">Add Attendee</string>
+    <string-array name="listOfUsers">
+        <item>morgant2</item>
+        <item>someuser123</item>
+        <item>anotheruser</item>
+        <item>anonymous</item>
+    </string-array>
     <string-array name="listOfStates">
         <item>Alabama</item>
         <item>Alaska</item>

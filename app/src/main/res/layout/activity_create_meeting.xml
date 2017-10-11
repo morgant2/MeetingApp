@@ -16,12 +16,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
             <EditText
-                android:layout_width="352dp"
-                android:layout_height="64dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Subject"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -60,10 +60,83 @@
                 app:layout_constraintLeft_toRightOf="parent"
                 android:hint="@string/lblZipCode"/>
 
-            <EditText
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="datetime"/>
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/btnStartTime"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/startTimeButtonName" />
+
+                <TextView
+                    android:id="@+id/lblStartTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/btnStartTime"
+                    android:text="10/11/2017 10:00AM"
+                    android:textSize="24sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/endTimeButtonName"
+                    android:id="@+id/btnEndTime"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/lblEndTime"
+                    android:textSize="24sp"
+                    android:text="10/11/2017 11:00AM"/>
+            </LinearLayout>
+            <!--<DatePicker-->
+                <!--android:id="@+id/startDate"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:calendarViewShown="false"-->
+                <!--android:datePickerMode="spinner"></DatePicker>-->
+            <!--<TimePicker-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:timePickerMode="spinner"-->
+                <!--android:id="@+id/startTime"></TimePicker>-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <Spinner
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/etAddAttendee"
+                    android:entries="@array/listOfUsers"
+                    android:prompt="@string/userPrompt"/>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:id="@+id/btnAddAttendee"/>
+            </LinearLayout>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/lvAttendees">
+
+            </ListView>
+        </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
