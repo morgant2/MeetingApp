@@ -19,6 +19,7 @@
     <string name="startTimeButtonName">Set Start Time</string>
     <string name="endTimeButtonName">Set End Time</string>
     <string name="userPrompt">Add Attendee</string>
+    <string name="timeButtonName">Set Time</string>
     <string-array name="listOfUsers">
         <item>morgant2</item>
         <item>someuser123</item>
