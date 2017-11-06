@@ -9,6 +9,6 @@ public class Meeting
     public Date StartTime;
     public Date EndTime;
     public Location MeetingLocation;
-    public User[] UsersAttending;
+    public Contact[] contactsAttending;
 }
 

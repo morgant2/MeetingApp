@@ -13,12 +13,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.meetingapp.BusinessObjects.Location;
-import com.meetingapp.BusinessObjects.User;
+import com.meetingapp.BusinessObjects.Contact;
 import com.meetingapp.R;
 
 public class CreateNewUserActivity extends AppCompatActivity {
 
-    private User newUser = null;
+    private Contact newContact = null;
     Location userLocation = null;
 
     private View etFirstName = null;
@@ -49,7 +49,7 @@ public class CreateNewUserActivity extends AppCompatActivity {
                 if(isFormFilled())
                 {
                     userLocation = new Location(((EditText)etAddress).getText().toString(), ((EditText)etCity).getText().toString(), ((Spinner)etState).getSelectedItem().toString(), ((EditText)etZipCode).getText().toString());
-                    newUser = new User(((EditText)etFirstName).getText().toString(), ((EditText)etLastName).getText().toString(), ((EditText)etUsername).getText().toString(), userLocation);
+                    newContact = new Contact(((EditText)etFirstName).getText().toString(), ((EditText)etLastName).getText().toString(), ((EditText)etUsername).getText().toString(), userLocation);
 
                     Context context = getApplicationContext();
                     String msg = constructToasterMsg();
@@ -64,11 +64,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
     private String constructToasterMsg() {
         String msg = "";
-        msg += newUser.FirstName + " " + newUser.LastName + "\n";
-        msg += "Username: " + newUser.Username + "\n";
+        msg += newContact.FirstName + " " + newContact.LastName + "\n";
+        msg += "Username: " + newContact.Email + "\n";
 
-        msg += "Address: " + newUser.UserHomeLocation.Address + " " + newUser.UserHomeLocation.City + ", ";
-        msg += newUser.UserHomeLocation.State + " " + newUser.UserHomeLocation.ZipCode;
+        msg += "Address: " + newContact.UserHomeLocation.Address + " " + newContact.UserHomeLocation.City + ", ";
+        msg += newContact.UserHomeLocation.State + " " + newContact.UserHomeLocation.ZipCode;
 
         return msg;
     }
