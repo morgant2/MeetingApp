@@ -14,10 +14,49 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="8dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btnStartTime"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timeButtonName"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                <TextView
+                    android:id="@+id/lblStartTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:labelFor="@+id/btnStartTime"
+                    android:textSize="24sp"/>
+
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btnEndTime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/timeButtonName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
+
+            <TextView
+                android:id="@+id/lblEndTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:labelFor="@+id/btnEndTime"
+                android:textSize="24sp"/>
+            </LinearLayout>
 
             <EditText
                 android:layout_width="match_parent"
@@ -28,47 +67,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/subject"/>
 
-        <include layout="@layout/fragment_location"
-            android:id="@+id/meetingLocation"/>
+            <include layout="@layout/fragment_location"
+                android:id="@+id/meetingLocation"/>
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
 
-            <include layout="@layout/fragment_time"
-                android:id="@+id/startTime"/>
-            <include layout="@layout/fragment_time"
-                android:id="@+id/endTime"/>
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:gravity="center">-->
-                <!--<Button-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/endTimeButtonName"-->
-                    <!--android:id="@+id/btnEndTime"/>-->
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:id="@+id/lblEndTime"-->
-                    <!--android:textSize="24sp"-->
-                    <!--android:text="10/11/2017 11:00AM"/>-->
-            <!--</LinearLayout>-->
-            <!--<DatePicker-->
-                <!--android:id="@+id/startDate"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:calendarViewShown="false"-->
-                <!--android:datePickerMode="spinner"></DatePicker>-->
-            <!--<TimePicker-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:timePickerMode="spinner"-->
-                <!--android:id="@+id/startTime"></TimePicker>-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,16 +90,26 @@
                     android:text="Add"
                     android:id="@+id/btnAddAttendee"/>
             </LinearLayout>
-        </LinearLayout>
 
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="234dp"
-            android:id="@+id/lvAttendees"
-            android:entries="@array/listOfUsers">
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="234dp"
+                android:id="@+id/lvAttendees"
+                android:entries="@array/listOfUsers">
 
-        </ListView>
+            </ListView>
         </LinearLayout>
     </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:clickable="true"
+        android:src="@drawable/common_full_open_on_phone"
+        app:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
