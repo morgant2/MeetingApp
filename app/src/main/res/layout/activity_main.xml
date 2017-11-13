@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meetingapp.Activities.MainActivity">
+    tools:context="com.meetingapp.MainActivity">
 
     <ScrollView
         android:layout_width="0dp"
@@ -47,6 +47,12 @@
                 android:text="Add New Meeting"
                 android:id="@+id/CreateMeeting"
                 app:layout_constraintTop_toBottomOf="@id/MeetingList"/>
+            <Button
+                android:layout_width="352dp"
+                android:layout_height="64dp"
+                android:text="Map Test"
+                android:id="@+id/MapTest"
+                app:layout_constraintTop_toBottomOf="@id/CreateMeeting"/>
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

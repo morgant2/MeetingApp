@@ -20,6 +20,18 @@
     <string name="endTimeButtonName">Set End Time</string>
     <string name="userPrompt">Add Attendee</string>
     <string name="timeButtonName">Set Time</string>
+    <string name="eventLocationText">Location</string>
+    <string name="mapsDistanceToLocation">Distance to Location</string>
+    <string name="mapsDistanceToLocationLabel">Distance to Location</string>
+    <string name="locationTestLocationLabel">Your Location</string>
+    <string name="locationTestLocationText">Location</string>
+    <string name="locationTestLocation2Label">2nd Location</string>
+    <string name="locationTestLocation2Text">Location 2</string>
+    <string name="locationTestCalculateBtn">Calculate</string>
+    <string name="locationTestAddress1Label">Address 1</string>
+    <string name="locationTestAddress1Test" />
+    <string name="locationTestAddress2Label">Address 2</string>
+    <string name="locationTestAddress2testText" />
     <string-array name="listOfUsers">
         <item>morgant2</item>
         <item>someuser123</item>

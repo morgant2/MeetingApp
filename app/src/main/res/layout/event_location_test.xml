@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTestLayout1"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestLocation1Label"
+            android:text="@string/locationTestLocationLabel"
+            android:paddingRight="50dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestLocation1Text"
+            android:text="@string/locationTestLocationText" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTestLayout2"
+        android:layout_below="@id/locationTestLayout1"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestLocation2Label"
+            android:text="@string/locationTestLocation2Label"
+            android:paddingRight="55dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestLocation2Text"
+            android:text="@string/locationTestLocation2Text"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTestAddressLayout"
+        android:layout_below="@id/locationTestLayout2"
+        android:paddingBottom="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestAddressLine1Layout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/locationTestAddress1Label"
+                android:text="@string/locationTestAddress1Label"/>
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="20dp"
+                android:id="@+id/locationTestAddress1Text"
+                android:text="@string/locationTestAddress1Test"
+                android:layout_toRightOf="@id/locationTestAddress1Label"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTestAddressLine2Layout"
+        android:layout_below="@id/locationTestAddressLine1Layout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/locationTestAddress2Label"
+            android:text="@string/locationTestAddress2Label"/>
+        <EditText
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:id="@+id/locationTestAddress2Text"
+            android:text="@string/locationTestAddress2testText"
+            android:layout_toRightOf="@id/locationTestAddress2Label"/>
+        </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/locationTestCalculate"
+        android:text="@string/locationTestCalculateBtn"
+       android:layout_below="@id/locationTestAddressLayout"/>
+
+</RelativeLayout>

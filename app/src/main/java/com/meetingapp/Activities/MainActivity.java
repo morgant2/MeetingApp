@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         Button createNewMeeting = (Button) findViewById(R.id.CreateMeeting);
         Button ScheduledMeetings = (Button) findViewById(R.id.MeetingList);
         Button createNewUser = (Button) findViewById(R.id.NewUser);
+        Button mapTest = (Button) findViewById(R.id.MapTest);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +64,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent createNewMeetingIntent = new Intent(MainActivity.this, CreateMeetingActivity.class);
                 MainActivity.this.startActivity(createNewMeetingIntent);
+            }
+        });
+
+        mapTest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent locationTestIntent = new Intent(MainActivity.this, LocationTest.class);
+                MainActivity.this.startActivity(locationTestIntent);
             }
         });
     }
