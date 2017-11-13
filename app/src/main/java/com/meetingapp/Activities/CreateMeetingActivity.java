@@ -122,15 +122,11 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 newMeeting.setStartTime(startDate.getTime());
                 newMeeting.setEndTime(endDate.getTime());
 
-                String address = ((TextView) findViewById(R.id.address)).getText().toString();
-                String city = ((TextView) findViewById(R.id.city)).getText().toString();
-                String state = ((Spinner) findViewById(R.id.states)).getSelectedItem().toString();
-                String zipCode = ((TextView) findViewById(R.id.zipcode)).getText().toString();
-
-                Location loc = new Location(address, city, state, zipCode);
-                newMeeting.setMeetingLocation(loc);
-
-                save(newMeeting);
+                try {
+                    save(newMeeting);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -162,27 +158,23 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
-    private void save(Meeting meeting)
-    {
+    private void save(Meeting meeting) throws JSONException {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        JSONObject out = null;
-        JSONArray meetings = null;
+        String allMeetingsJson = sharedPreferences.getString(getString(R.string.meetings_key), "");
 
-        try {
-            out = new JSONObject(loadGSON(getApplicationContext(), "meetings.json"));
-            meetings = (JSONArray) out.get("meetings");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        JSONObject jsonObject = new JSONObject(allMeetingsJson);
+        JSONArray jsonArray = jsonObject.getJSONArray("meetings");
+        JSONObject newMeetingJSONObject = new JSONObject();
 
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(meeting, Meeting.class);
+        Gson meetingGson = new Gson();
+        String jsonString = meetingGson.toJson(meeting, Meeting.class);
 
-        meetings.put(jsonString);
+        jsonArray.put(jsonString);
+        newMeetingJSONObject.put("meetings", jsonArray);
 
-        editor.putString("meetings_key", meetings.toString());
+        editor.putString(getString(R.string.meetings_key), newMeetingJSONObject.toString());
         editor.apply();
     }
 

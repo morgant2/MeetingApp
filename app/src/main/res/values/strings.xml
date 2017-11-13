@@ -20,6 +20,7 @@
     <string name="endTimeButtonName">Set End Time</string>
     <string name="userPrompt">Add Attendee</string>
     <string name="timeButtonName">Set Time</string>
+    <string name="meetings_key">meetings_key</string>
     <string-array name="listOfUsers">
         <item>morgant2</item>
         <item>someuser123</item>
