@@ -64,11 +64,11 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
     private String constructToasterMsg() {
         String msg = "";
-        msg += newContact.FirstName + " " + newContact.LastName + "\n";
-        msg += "Username: " + newContact.Email + "\n";
+        msg += newContact.getFirstName() + " " + newContact.getLastName() + "\n";
+        msg += "Username: " + newContact.getEmail() + "\n";
 
-        msg += "Address: " + newContact.UserHomeLocation.Address + " " + newContact.UserHomeLocation.City + ", ";
-        msg += newContact.UserHomeLocation.State + " " + newContact.UserHomeLocation.ZipCode;
+        msg += "Address: " + newContact.getUserHomeLocation().getAddress() + " " + newContact.getUserHomeLocation().getCity() + ", ";
+        msg += newContact.getUserHomeLocation().getState() + " " + newContact.getUserHomeLocation().getZipCode();
 
         return msg;
     }

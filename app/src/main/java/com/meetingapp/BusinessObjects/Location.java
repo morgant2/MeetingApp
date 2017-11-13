@@ -2,10 +2,10 @@ package com.meetingapp.BusinessObjects;
 
 public class Location
 {
-    public String Address;
-    public String City;
-    public String State;
-    public String ZipCode;
+    private String Address;
+    private String City;
+    private String State;
+    private String ZipCode;
 
     public Location(String address, String city, String state, String zipCode)
     {
@@ -15,4 +15,19 @@ public class Location
         this.ZipCode = zipCode;
     }
 
+    public String getAddress() {
+        return Address;
+    }
+
+    public String getCity() {
+        return City;
+    }
+
+    public String getState() {
+        return State;
+    }
+
+    public String getZipCode() {
+        return ZipCode;
+    }
 }

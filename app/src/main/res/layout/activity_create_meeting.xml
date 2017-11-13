@@ -26,7 +26,7 @@
                     android:id="@+id/btnStartTime"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/timeButtonName"
+                    android:text="@string/startTimeButtonName"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -37,7 +37,7 @@
                     android:labelFor="@+id/btnStartTime"
                     android:textSize="24sp"/>
 
-            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                 android:id="@+id/btnEndTime"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/timeButtonName"
+                android:text="@string/endTimeButtonName"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
@@ -56,22 +56,16 @@
                 android:layout_height="wrap_content"
                 android:labelFor="@+id/btnEndTime"
                 android:textSize="24sp"/>
-            </LinearLayout>
+        </LinearLayout>
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Subject"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:id="@+id/subject"/>
-
-            <include layout="@layout/fragment_location"
-                android:id="@+id/meetingLocation"/>
-
-
-
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Subject"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/subject"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -96,7 +90,6 @@
                 android:layout_height="234dp"
                 android:id="@+id/lvAttendees"
                 android:entries="@array/listOfUsers">
-
             </ListView>
         </LinearLayout>
     </ScrollView>

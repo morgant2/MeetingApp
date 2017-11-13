@@ -1,0 +1,40 @@
+[
+  {
+    "FirstName": "Tommy",
+    "LastName": "Morgan",
+    "Email": "email@email.com",
+    "UserHomeLocation":
+    {
+      "Address": "49 E 4th St",
+      "City": "Cincinnati",
+      "State": "Ohio",
+      "ZipCode": "45202"
+    }
+  },
+
+  {
+    "FirstName": "John",
+    "LastName": "Doe",
+    "Email": "jdoe@email.com",
+    "UserHomeLocation":
+    {
+      "Address": "5114 Taylor Mill Rd",
+      "City": "Taylor Mill",
+      "State": "Kentucky",
+      "ZipCode": "41015"
+    }
+  },
+
+  {
+    "FirstName": "Jane",
+    "LastName": "Doe",
+    "Email": "Jane@email.com",
+    "UserHomeLocation":
+    {
+      "Address": "7414 Turfway Rd",
+      "City": "Florence",
+      "State": "Kentucky",
+      "ZipCode": "41042"
+    }
+  }
+]
