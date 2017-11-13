@@ -3,6 +3,7 @@ package com.meetingapp.Activities;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -124,9 +125,16 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
                 try {
                     save(newMeeting);
+
+                    Intent scheduledMeetingsIntent = new Intent(CreateMeetingActivity.this, ScheduledMeetingsActivity.class);
+                    CreateMeetingActivity.this.startActivity(scheduledMeetingsIntent);
+
                 } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "Unable to save meeting!", Toast.LENGTH_LONG);
                     e.printStackTrace();
                 }
+
+
 
             }
         });
