@@ -21,6 +21,10 @@
     <string name="userPrompt">Add Attendee</string>
     <string name="timeButtonName">Set Time</string>
     <string name="meetings_key">meetings_key</string>
+    <string name="menu_create_meeting">Create Meeting</string>
+    <string name="menu_scheduled_meetings">Scheduled Meetings</string>
+    <string name="menu_view_contacts">Contacts</string>
+    <string name="menu_view_profile">Profile</string>
     <string-array name="listOfUsers">
         <item>morgant2</item>
         <item>someuser123</item>

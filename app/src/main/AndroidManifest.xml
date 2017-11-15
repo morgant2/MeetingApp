@@ -42,7 +42,8 @@
         <activity
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Activities.CreateMeetingActivity"></activity>
+        <activity android:name=".Activities.CreateMeetingActivity" />
+        <activity android:name=".Activities.BaseActivity"></activity>
     </application>
 
 </manifest>
