@@ -170,7 +170,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String allMeetingsJson = sharedPreferences.getString(getString(R.string.meetings_key), "");
+        String allMeetingsJson = sharedPreferences.getString(getString(R.string.meetings_key), "{'meetings':[]}");
 
         JSONObject jsonObject = new JSONObject(allMeetingsJson);
         JSONArray jsonArray = jsonObject.getJSONArray("meetings");
