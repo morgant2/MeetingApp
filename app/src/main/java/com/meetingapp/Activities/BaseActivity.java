@@ -1,6 +1,8 @@
 package com.meetingapp.Activities;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -20,6 +22,9 @@ abstract public class BaseActivity extends AppCompatActivity implements MenuItem
     private ActionBarDrawerToggle mDrawerToggle;
     private Menu drawerMenu;                        //menu to populate drawer
 
+    // Need to override this in each activity which is opened with the nav drawer
+    // provides the layoutid of the activity for setting the content view in onCreate in BaseActivity
+    protected abstract @LayoutRes int getLayoutId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +51,6 @@ abstract public class BaseActivity extends AppCompatActivity implements MenuItem
         mDrawerToggle.syncState();
     }
 
-    //todo: Do we need to override setContentView in order for other activities to work properly?
-    // refer to https://gist.github.com/anandbose/7d6efb35c900eaba3b26
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
