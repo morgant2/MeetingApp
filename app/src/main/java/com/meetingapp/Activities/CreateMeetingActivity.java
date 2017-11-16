@@ -4,7 +4,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,18 +20,14 @@ import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 import com.meetingapp.BusinessObjects.Contact;
-import com.meetingapp.BusinessObjects.Location;
 import com.meetingapp.BusinessObjects.Meeting;
 import com.meetingapp.R;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -48,7 +43,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
     Calendar endDate;
     Calendar date;
     Context context;
-    List<Contact> contacts;
+    ArrayList<Contact> contacts;
 
     public void showDateTimePicker(final boolean isStartTime) {
         final Calendar currentDate = Calendar.getInstance();
@@ -97,11 +92,11 @@ public class CreateMeetingActivity extends AppCompatActivity {
         Button btnSetEndTime = (Button)     findViewById(R.id.btnEndTime);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
-        GsonBuilder builder = new GsonBuilder();
-        Gson gson = builder.enableComplexMapKeySerialization().create();
-        String json = loadGSON(getApplicationContext(), "contacts.json");
-        Type type = new TypeToken<List<Contact>>(){}.getType();
-        contacts = (List<Contact>) gson.fromJson(json, type);
+        try {
+            setContacts();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         Spinner spinPossibleAttendees = (Spinner) findViewById(R.id.spinAddAttendee);
 
@@ -111,7 +106,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
             possibleAttendeesList.add(contact.getLastFirstName());
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), R.layout.support_simple_spinner_dropdown_item, possibleAttendeesList);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinPossibleAttendees.setAdapter(adapter);
 
@@ -124,7 +119,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 newMeeting.setEndTime(endDate.getTime());
 
                 try {
-                    save(newMeeting);
+                    newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
 
                     Intent scheduledMeetingsIntent = new Intent(CreateMeetingActivity.this, ScheduledMeetingsActivity.class);
                     CreateMeetingActivity.this.startActivity(scheduledMeetingsIntent);
@@ -133,9 +128,6 @@ public class CreateMeetingActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Unable to save meeting!", Toast.LENGTH_LONG);
                     e.printStackTrace();
                 }
-
-
-
             }
         });
 
@@ -166,24 +158,33 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
-    private void save(Meeting meeting) throws JSONException {
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String allMeetingsJson = sharedPreferences.getString(getString(R.string.meetings_key), "{'meetings':[]}");
 
-        JSONObject jsonObject = new JSONObject(allMeetingsJson);
-        JSONArray jsonArray = jsonObject.getJSONArray("meetings");
-        JSONObject newMeetingJSONObject = new JSONObject();
+    public void setContacts() throws JSONException {
+        GsonBuilder builder = new GsonBuilder();
+        Gson gson = builder.enableComplexMapKeySerialization().create();
 
-        Gson meetingGson = new Gson();
-        String jsonString = meetingGson.toJson(meeting, Meeting.class);
+        String contactsJson = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE).getString(getString(R.string.contacts_key), "{'contacts':[]}");
+        if (contactsJson == "") contactsJson = "{'contacts':[]}";
+        JSONObject jsonObject = new JSONObject(contactsJson);
+        JSONArray jsonArray = jsonObject.getJSONArray("contacts");
+        Type type = new TypeToken<Contact>(){}.getType();
 
-        jsonArray.put(jsonString);
-        newMeetingJSONObject.put("meetings", jsonArray);
+        if(contacts == null)
+        {
+            contacts = new ArrayList<Contact>();
+        }
 
-        editor.putString(getString(R.string.meetings_key), newMeetingJSONObject.toString());
-        editor.apply();
+        for(int i = 0; i < jsonArray.length(); i++)
+        {
+            contacts.add((Contact) gson.fromJson(jsonArray.get(i).toString(), type));
+        }
+
+        if(contacts == null || !(contacts.size() > 0))
+        {
+            throw new JSONException("No contacts");
+        }
+
     }
 
     public String loadGSON(Context context, String fileName)

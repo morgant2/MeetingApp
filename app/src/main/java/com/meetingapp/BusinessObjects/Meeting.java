@@ -1,5 +1,14 @@
 package com.meetingapp.BusinessObjects;
 
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.meetingapp.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Date;
 
 public class Meeting
@@ -56,6 +65,25 @@ public class Meeting
 
     public void setContactsAttending(Contact[] contactsAttending) {
         this.contactsAttending = contactsAttending;
+    }
+
+    public void save(SharedPreferences sharedPreferences, String key) throws JSONException {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String allMeetingsJson = sharedPreferences.getString(key, "{'meetings':[]}");
+
+        JSONObject jsonObject = new JSONObject(allMeetingsJson);
+        JSONArray jsonArray = jsonObject.getJSONArray("meetings");
+        JSONObject newMeetingJSONObject = new JSONObject();
+
+        Gson meetingGson = new Gson();
+        String jsonString = meetingGson.toJson(this, Meeting.class);
+
+        jsonArray.put(jsonString);
+        newMeetingJSONObject.put("meetings", jsonArray);
+
+        editor.putString(key, newMeetingJSONObject.toString());
+        editor.apply();
     }
 
     private Contact[] contactsAttending;

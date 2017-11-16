@@ -66,7 +66,8 @@ public class CreateContactActivity extends AppCompatActivity {
                             userLocation);
 
                     try {
-                        save(newContact);
+                        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE);
+                        newContact.save(sharedPreferences, getString(R.string.contacts_key));
                         Toast.makeText(getApplicationContext(), constructToasterMsg(), Toast.LENGTH_LONG);
 
                         Intent scheduledMeetingsIntent = new Intent(CreateContactActivity.this, ContactsActivity.class);
@@ -189,25 +190,7 @@ public class CreateContactActivity extends AppCompatActivity {
         return isFilled;
     }
 
-    private void save(Contact contact) throws JSONException {
-        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        String allMeetingsJson = sharedPreferences.getString(getString(R.string.contacts_key), "{'contacts':[]}");
-
-        JSONObject jsonObject = new JSONObject(allMeetingsJson);
-        JSONArray jsonArray = jsonObject.getJSONArray("contacts");
-        JSONObject newContactJSONObject = new JSONObject();
-
-        Gson meetingGson = new Gson();
-        String jsonString = meetingGson.toJson(contact, Contact.class);
-
-        jsonArray.put(jsonString);
-        newContactJSONObject.put("contacts", jsonArray);
-
-        editor.putString(getString(R.string.meetings_key), newContactJSONObject.toString());
-        editor.apply();
-    }
 
 
 

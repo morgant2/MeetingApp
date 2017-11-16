@@ -1,6 +1,14 @@
 package com.meetingapp.BusinessObjects;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+
+import com.google.gson.Gson;
+import com.meetingapp.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,4 +51,24 @@ public class Contact
         return LastName + ", " + FirstName;
     }
 
+    public void save(SharedPreferences sharedPreferences, String key) throws JSONException {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String allContactsJson = sharedPreferences.getString(key, "{'contacts':[]}");
+
+        if(allContactsJson == "") allContactsJson = "{'contacts':[]}";
+
+        JSONObject jsonObject = new JSONObject(allContactsJson);
+        JSONArray jsonArray = jsonObject.getJSONArray("contacts");
+        JSONObject newContactJSONObject = new JSONObject();
+
+        Gson meetingGson = new Gson();
+        String jsonString = meetingGson.toJson(this, Contact.class);
+
+        jsonArray.put(jsonString);
+        newContactJSONObject.put("contacts", jsonArray);
+
+        editor.putString(key, newContactJSONObject.toString());
+        editor.apply();
+    }
 }
