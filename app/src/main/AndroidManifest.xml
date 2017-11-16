@@ -25,7 +25,7 @@
         </activity>
         <activity android:name=".Activities.ProfileActivity" />
         <activity android:name=".Activities.ContactsActivity" />
-        <activity android:name=".Activities.CreateNewUserActivity" />
+        <activity android:name=".Activities.CreateContactActivity" />
         <activity android:name=".Activities.ScheduledMeetingsActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -43,7 +43,7 @@
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.CreateMeetingActivity" />
-        <activity android:name=".Activities.BaseActivity"></activity>
+        <!--<activity android:name=".Activities.BaseActivity"></activity>-->
     </application>
 
 </manifest>

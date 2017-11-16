@@ -6,6 +6,8 @@ public class Location
     private String City;
     private String State;
     private String ZipCode;
+    private double Longitude;
+    private double Latitude;
 
     public Location(String address, String city, String state, String zipCode)
     {
@@ -13,6 +15,22 @@ public class Location
         this.City = city;
         this.State = state;
         this.ZipCode = zipCode;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
     }
 
     public String getAddress() {

@@ -94,7 +94,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
 
         Button btnAddAttendee = (Button) findViewById(R.id.btnAddAttendee);
         Button btnSetStartTime = (Button) findViewById(R.id.btnStartTime);
-        Button btnSetEndTime = (Button) findViewById(R.id.btnEndTime);
+        Button btnSetEndTime = (Button)     findViewById(R.id.btnEndTime);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         GsonBuilder builder = new GsonBuilder();

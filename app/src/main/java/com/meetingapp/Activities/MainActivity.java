@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         createNewUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent createNewUserIntent = new Intent(MainActivity.this, CreateNewUserActivity.class);
+                Intent createNewUserIntent = new Intent(MainActivity.this, CreateContactActivity.class);
                 MainActivity.this.startActivity(createNewUserIntent);
             }
         });

@@ -1,6 +1,8 @@
 package com.meetingapp.Activities;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,11 +14,16 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.meetingapp.BusinessObjects.Location;
 import com.meetingapp.BusinessObjects.Contact;
 import com.meetingapp.R;
 
-public class CreateNewUserActivity extends AppCompatActivity {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class CreateContactActivity extends AppCompatActivity {
 
     private Contact newContact = null;
     Location userLocation = null;
@@ -48,15 +55,26 @@ public class CreateNewUserActivity extends AppCompatActivity {
             public void onClick(View view) {
                 if(isFormFilled())
                 {
-                    userLocation = new Location(((EditText)etAddress).getText().toString(), ((EditText)etCity).getText().toString(), ((Spinner)etState).getSelectedItem().toString(), ((EditText)etZipCode).getText().toString());
-                    newContact = new Contact(((EditText)etFirstName).getText().toString(), ((EditText)etLastName).getText().toString(), ((EditText)etUsername).getText().toString(), userLocation);
+                    userLocation = new Location(((EditText)etAddress).getText().toString(),
+                            ((EditText)etCity).getText().toString(),
+                            ((Spinner)etState).getSelectedItem().toString(),
+                            ((EditText)etZipCode).getText().toString());
+                    newContact = new Contact(
+                            ((EditText)etFirstName).getText().toString(),
+                            ((EditText)etLastName).getText().toString(),
+                            ((EditText)etUsername).getText().toString(),
+                            userLocation);
 
-                    Context context = getApplicationContext();
-                    String msg = constructToasterMsg();
-                    int length = Toast.LENGTH_LONG;
+                    try {
+                        save(newContact);
+                        Toast.makeText(getApplicationContext(), constructToasterMsg(), Toast.LENGTH_LONG);
 
-                    Toast toast = Toast.makeText(context, msg, length);
-                    toast.show();
+                        Intent scheduledMeetingsIntent = new Intent(CreateContactActivity.this, ContactsActivity.class);
+                        CreateContactActivity.this.startActivity(scheduledMeetingsIntent);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Unable to save new contact.", Toast.LENGTH_LONG);
+                    }
                 }
             }
         });
@@ -170,6 +188,27 @@ public class CreateNewUserActivity extends AppCompatActivity {
 
         return isFilled;
     }
+
+    private void save(Contact contact) throws JSONException {
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        String allMeetingsJson = sharedPreferences.getString(getString(R.string.contacts_key), "{'contacts':[]}");
+
+        JSONObject jsonObject = new JSONObject(allMeetingsJson);
+        JSONArray jsonArray = jsonObject.getJSONArray("contacts");
+        JSONObject newContactJSONObject = new JSONObject();
+
+        Gson meetingGson = new Gson();
+        String jsonString = meetingGson.toJson(contact, Contact.class);
+
+        jsonArray.put(jsonString);
+        newContactJSONObject.put("contacts", jsonArray);
+
+        editor.putString(getString(R.string.meetings_key), newContactJSONObject.toString());
+        editor.apply();
+    }
+
 
 
 }
