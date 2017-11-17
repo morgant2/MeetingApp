@@ -4,7 +4,6 @@ import android.content.SharedPreferences;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
-import com.meetingapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -127,5 +126,25 @@ public class Meeting
         editor.apply();
     }
 
+    @Override
+    public String toString()
+    {
+        String msg = "";
+        msg += "The meeting about " + this.Subject + " goes from " + this.StartTime + " to " + this.EndTime + ". ";
+        msg += "It is located at " + this.getMeetingLocation() + ". ";
+        msg += "\nAttendees: \n" + this.getStringOfContactsAttending();
+        return msg;
+    }
+
+    private String getStringOfContactsAttending() {
+        String msg = "";
+
+        for(int i = 0; i < contactsAttending.size(); i++)
+        {
+            msg += contactsAttending.get(i).getLastFirstName() + ((i < contactsAttending.size() - 1) ? ", \n" : "");
+        }
+
+        return msg;
+    }
 }
 
