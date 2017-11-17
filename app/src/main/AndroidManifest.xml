@@ -43,6 +43,8 @@
             android:name=".Activities.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".Activities.CreateMeetingActivity" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+        <uses-permission android:name="android.permission.INTERNET"/>
         <!--<activity android:name=".Activities.BaseActivity"></activity>-->
     </application>
 

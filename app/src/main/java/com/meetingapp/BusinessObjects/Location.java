@@ -1,13 +1,23 @@
 package com.meetingapp.BusinessObjects;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class Location
 {
     private String Address;
     private String City;
     private String State;
     private String ZipCode;
-    private double Longitude;
-    private double Latitude;
+
+    public LatLng getCoordinates() {
+        return Coordinates;
+    }
+
+    public void setCoordinates(LatLng coordinates) {
+        this.Coordinates = coordinates;
+    }
+
+    private LatLng Coordinates;
 
     public Location(String address, String city, String state, String zipCode)
     {
@@ -16,23 +26,6 @@ public class Location
         this.State = state;
         this.ZipCode = zipCode;
     }
-
-    public double getLongitude() {
-        return Longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        Longitude = longitude;
-    }
-
-    public double getLatitude() {
-        return Latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        Latitude = latitude;
-    }
-
     public String getAddress() {
         return Address;
     }
@@ -47,5 +40,10 @@ public class Location
 
     public String getZipCode() {
         return ZipCode;
+    }
+
+    public String getFullAddress()
+    {
+        return this.Address + " " + this.City + ", " + this.State + " " + this.ZipCode;
     }
 }

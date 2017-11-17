@@ -3,6 +3,8 @@ package com.meetingapp.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,11 +16,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.meetingapp.BusinessObjects.Location;
 import com.meetingapp.BusinessObjects.Contact;
 import com.meetingapp.R;
 
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 public class CreateContactActivity extends AppCompatActivity {
 
@@ -50,8 +58,9 @@ public class CreateContactActivity extends AppCompatActivity {
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isFormFilled() && isValidLocation())
+                if(isFormFilled())
                 {
+
                     userLocation = new Location(((EditText)etAddress).getText().toString(),
                             ((EditText)etCity).getText().toString(),
                             ((Spinner)etState).getSelectedItem().toString(),
@@ -61,6 +70,8 @@ public class CreateContactActivity extends AppCompatActivity {
                             ((EditText)etLastName).getText().toString(),
                             ((EditText)etUsername).getText().toString(),
                             userLocation);
+
+                    userLocation.setCoordinates(getLocation(getApplicationContext(), userLocation));
 
                     try {
                         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE);
@@ -79,7 +90,12 @@ public class CreateContactActivity extends AppCompatActivity {
 
     private boolean isValidLocation() {
         //TODO: Add Location Validation
-        return true;
+        Location location = new Location(((EditText)etAddress).getText().toString(),
+                ((EditText)etCity).getText().toString(),
+                ((Spinner)etState).getSelectedItem().toString(),
+                ((EditText)etZipCode).getText().toString());
+
+        return getLocation(getApplicationContext(), location) != null;
     }
 
     private void createTextEventListener() {
@@ -124,14 +140,16 @@ public class CreateContactActivity extends AppCompatActivity {
     }
 
     private void toggleButtonEnabledState() {
+        boolean setEnabled = false;
         if(isFormFilled())
         {
-            btnCreateUser.setEnabled(true);
+            //Do not want to run this method everytime a user types
+            if(isValidLocation())
+            {
+                setEnabled = true;
+            }
         }
-        else
-        {
-            btnCreateUser.setEnabled(false);
-        }
+        btnCreateUser.setEnabled(setEnabled);
     }
 
     private void setETFields() {
@@ -180,9 +198,29 @@ public class CreateContactActivity extends AppCompatActivity {
         return isFilled;
     }
 
+    private LatLng getLocation(Context context, Location userLocation){
+        Geocoder coder = new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
 
+        try {
+            // May throw an IOException
+            address = coder.getFromLocationName(userLocation.getFullAddress(), 5);
+            if (address == null) {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
 
+            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
 
+        } catch (IOException ex) {
 
+            ex.printStackTrace();
+        }
+
+        return p1;
+    }
 }
 
