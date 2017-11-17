@@ -14,14 +14,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.meetingapp.BusinessObjects.Location;
 import com.meetingapp.BusinessObjects.Contact;
 import com.meetingapp.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 public class CreateContactActivity extends AppCompatActivity {
 
@@ -53,7 +50,7 @@ public class CreateContactActivity extends AppCompatActivity {
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isFormFilled())
+                if(isFormFilled() && isValidLocation())
                 {
                     userLocation = new Location(((EditText)etAddress).getText().toString(),
                             ((EditText)etCity).getText().toString(),
@@ -68,28 +65,21 @@ public class CreateContactActivity extends AppCompatActivity {
                     try {
                         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE);
                         newContact.save(sharedPreferences, getString(R.string.contacts_key));
-                        Toast.makeText(getApplicationContext(), constructToasterMsg(), Toast.LENGTH_LONG);
 
                         Intent scheduledMeetingsIntent = new Intent(CreateContactActivity.this, ContactsActivity.class);
                         CreateContactActivity.this.startActivity(scheduledMeetingsIntent);
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(getApplicationContext(), "Unable to save new contact.", Toast.LENGTH_LONG);
+                        Toast.makeText(getApplicationContext(), "Unable to save new contact.", Toast.LENGTH_LONG).show();
                     }
                 }
             }
         });
     }
 
-    private String constructToasterMsg() {
-        String msg = "";
-        msg += newContact.getFirstName() + " " + newContact.getLastName() + "\n";
-        msg += "Username: " + newContact.getEmail() + "\n";
-
-        msg += "Address: " + newContact.getUserHomeLocation().getAddress() + " " + newContact.getUserHomeLocation().getCity() + ", ";
-        msg += newContact.getUserHomeLocation().getState() + " " + newContact.getUserHomeLocation().getZipCode();
-
-        return msg;
+    private boolean isValidLocation() {
+        //TODO: Add Location Validation
+        return true;
     }
 
     private void createTextEventListener() {

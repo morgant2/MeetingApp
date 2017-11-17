@@ -1,18 +1,13 @@
 package com.meetingapp.BusinessObjects;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
-import com.meetingapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 public class Contact
 {

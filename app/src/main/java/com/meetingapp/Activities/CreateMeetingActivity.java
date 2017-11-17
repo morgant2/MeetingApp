@@ -23,12 +23,10 @@ import com.meetingapp.BusinessObjects.Contact;
 import com.meetingapp.BusinessObjects.Meeting;
 import com.meetingapp.R;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -43,7 +41,8 @@ public class CreateMeetingActivity extends AppCompatActivity {
     Calendar endDate;
     Calendar date;
     Context context;
-    ArrayList<Contact> contacts;
+    ArrayList<Contact> possibleContacts;
+    ArrayList<Contact> actualContacts;
 
     public void showDateTimePicker(final boolean isStartTime) {
         final Calendar currentDate = Calendar.getInstance();
@@ -101,7 +100,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
         Spinner spinPossibleAttendees = (Spinner) findViewById(R.id.spinAddAttendee);
 
         ArrayList<String> possibleAttendeesList = new ArrayList<>();
-        for(Contact contact : contacts)
+        for(Contact contact : possibleContacts)
         {
             possibleAttendeesList.add(contact.getLastFirstName());
         }
@@ -153,57 +152,61 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 ListView lvAttendees = (ListView) findViewById(R.id.lvAttendees);
                 Spinner spinAddAttendee = (Spinner) findViewById(R.id.spinAddAttendee);
 
-                spinAddAttendee.getSelectedItem().toString();
+                actualContacts.add(possibleContacts.get(spinAddAttendee.getId()));
+                possibleContacts.remove(spinAddAttendee.getId());
+
+                spinAddAttendee.setAdapter(getArrayAdapter(R.layout.support_simple_spinner_dropdown_item, getLastFirstNameArray(possibleContacts)));
+                lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
             }
         });
     }
 
 
+    private ArrayList<String> getLastFirstNameArray(ArrayList<Contact> contacts)
+    {
+        ArrayList<String> lastFirstNameList = new ArrayList<String>();
+        for(Contact contact : actualContacts)
+        {
+            lastFirstNameList.add(contact.getLastFirstName());
+        }
+
+        return lastFirstNameList;
+    }
+
+    private ArrayAdapter<String> getArrayAdapter( int layout, ArrayList<String> arrayList)
+    {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), layout, arrayList);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        return adapter;
+    }
 
     public void setContacts() throws JSONException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.enableComplexMapKeySerialization().create();
 
-        String contactsJson = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE).getString(getString(R.string.contacts_key), "{'contacts':[]}");
+        String contactsJson = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE).getString(getString(R.string.contacts_key), "{'possibleContacts':[]}");
         if (contactsJson == "") contactsJson = "{'contacts':[]}";
         JSONObject jsonObject = new JSONObject(contactsJson);
         JSONArray jsonArray = jsonObject.getJSONArray("contacts");
         Type type = new TypeToken<Contact>(){}.getType();
 
-        if(contacts == null)
+        if(possibleContacts == null)
         {
-            contacts = new ArrayList<Contact>();
+            possibleContacts = new ArrayList<Contact>();
         }
 
         for(int i = 0; i < jsonArray.length(); i++)
         {
-            contacts.add((Contact) gson.fromJson(jsonArray.get(i).toString(), type));
+            possibleContacts.add((Contact) gson.fromJson(jsonArray.get(i).toString(), type));
         }
 
-        if(contacts == null || !(contacts.size() > 0))
+        if(possibleContacts == null || !(possibleContacts.size() > 0))
         {
-            throw new JSONException("No contacts");
+            throw new JSONException("No possibleContacts");
         }
 
     }
 
-    public String loadGSON(Context context, String fileName)
-    {
-        String json = null;
-        try
-        {
-            InputStream is = context.getAssets().open(fileName);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        return json;
-    }
 
 }
