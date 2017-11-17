@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Meeting
@@ -18,6 +19,7 @@ public class Meeting
     private Date StartTime;
     private Date EndTime;
     private Location MeetingLocation;
+    private ArrayList<Contact> contactsAttending;
 
     public String getSubject() {
         return Subject;
@@ -59,11 +61,11 @@ public class Meeting
         MeetingLocation = meetingLocation;
     }
 
-    public Contact[] getContactsAttending() {
+    public ArrayList<Contact> getContactsAttending() {
         return contactsAttending;
     }
 
-    public void setContactsAttending(Contact[] contactsAttending) {
+    public void setContactsAttending(ArrayList<Contact> contactsAttending) {
         this.contactsAttending = contactsAttending;
     }
 
@@ -86,6 +88,5 @@ public class Meeting
         editor.apply();
     }
 
-    private Contact[] contactsAttending;
 }
 

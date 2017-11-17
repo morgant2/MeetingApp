@@ -116,6 +116,7 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 newMeeting.setSubject(((EditText) findViewById(R.id.subject)).getText().toString());
                 newMeeting.setStartTime(startDate.getTime());
                 newMeeting.setEndTime(endDate.getTime());
+                newMeeting.setContactsAttending(actualContacts);
 
                 try {
                     newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
@@ -149,23 +150,32 @@ public class CreateMeetingActivity extends AppCompatActivity {
         btnAddAttendee.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ListView lvAttendees = (ListView) findViewById(R.id.lvAttendees);
-                Spinner spinAddAttendee = (Spinner) findViewById(R.id.spinAddAttendee);
+                addContact();
 
-                actualContacts.add(possibleContacts.get(spinAddAttendee.getId()));
-                possibleContacts.remove(spinAddAttendee.getId());
-
-                spinAddAttendee.setAdapter(getArrayAdapter(R.layout.support_simple_spinner_dropdown_item, getLastFirstNameArray(possibleContacts)));
-                lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
             }
         });
+    }
+
+    private void addContact() {
+        ListView lvAttendees = (ListView) findViewById(R.id.lvAttendees);
+        Spinner spinAddAttendee = (Spinner) findViewById(R.id.spinAddAttendee);
+
+        int selectedItem = spinAddAttendee.getSelectedItemPosition();
+
+        if(actualContacts == null) actualContacts = new ArrayList<Contact>();
+
+        actualContacts.add((Contact) possibleContacts.get(selectedItem));
+        possibleContacts.remove(selectedItem);
+
+        spinAddAttendee.setAdapter(getArrayAdapter(R.layout.support_simple_spinner_dropdown_item, getLastFirstNameArray(possibleContacts)));
+        lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
     }
 
 
     private ArrayList<String> getLastFirstNameArray(ArrayList<Contact> contacts)
     {
         ArrayList<String> lastFirstNameList = new ArrayList<String>();
-        for(Contact contact : actualContacts)
+        for(Contact contact : contacts)
         {
             lastFirstNameList.add(contact.getLastFirstName());
         }
