@@ -121,6 +121,9 @@ public class CreateMeetingActivity extends AppCompatActivity {
                 try {
                     newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
 
+                    //TODO: Bug - Send Email and Create Meeting Intents are Out of Sequence
+                    sendEmail(newMeeting);
+
                     Intent scheduledMeetingsIntent = new Intent(CreateMeetingActivity.this, ScheduledMeetingsActivity.class);
                     CreateMeetingActivity.this.startActivity(scheduledMeetingsIntent);
 
@@ -156,6 +159,25 @@ public class CreateMeetingActivity extends AppCompatActivity {
         });
     }
 
+    private void sendEmail(Meeting meeting) {
+        ArrayList<Contact> contacts = meeting.getContactsAttending();
+        String[] emails = new String[contacts.size()];
+
+        for(int i = 0; i < emails.length; i++)
+        {
+            emails[i] = contacts.get(i).getEmail();
+        }
+
+        Intent sendEmail = new Intent(Intent.ACTION_SEND);
+
+        sendEmail.setType("plain/text");
+        sendEmail.putExtra(Intent.EXTRA_EMAIL, emails);
+        sendEmail.putExtra(Intent.EXTRA_SUBJECT, "Meeting Notification: " + meeting.getSubject());
+        sendEmail.putExtra(Intent.EXTRA_TEXT, constructMeetingBody(meeting));
+
+        CreateMeetingActivity.this.startActivity(sendEmail);
+    }
+
     private void addContact() {
         ListView lvAttendees = (ListView) findViewById(R.id.lvAttendees);
         Spinner spinAddAttendee = (Spinner) findViewById(R.id.spinAddAttendee);
@@ -171,6 +193,17 @@ public class CreateMeetingActivity extends AppCompatActivity {
         lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
     }
 
+    private String constructMeetingBody(Meeting meeting)
+    {
+        String msg = "";
+
+        msg += "Hello,\n\n";
+        msg += "You have been invited to discuss " + meeting.getSubject() + ".\n";
+        msg += "Meeting Details:\n" + meeting.toString();
+        msg += "\n\nSee you there!";
+
+        return msg;
+    }
 
     private ArrayList<String> getLastFirstNameArray(ArrayList<Contact> contacts)
     {
