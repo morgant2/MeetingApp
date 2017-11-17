@@ -2,6 +2,7 @@ package com.meetingapp.BusinessObjects;
 
 import android.content.SharedPreferences;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
 import com.meetingapp.R;
 
@@ -20,6 +21,7 @@ public class Meeting
     private Date EndTime;
     private Location MeetingLocation;
     private ArrayList<Contact> contactsAttending;
+    private LatLng CenterLocation;
 
     public String getSubject() {
         return Subject;
@@ -68,6 +70,43 @@ public class Meeting
     public void setContactsAttending(ArrayList<Contact> contactsAttending) {
         this.contactsAttending = contactsAttending;
     }
+
+    //calculation based off of https://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
+    private void setCenterLocation()
+    {
+        double x = 0;
+        double y = 0;
+        double z = 0;
+        int total = 0;
+
+        for(Contact contact : this.contactsAttending)
+        {
+            double latitude = contact.getUserHomeLocation().getCoordinates().latitude * Math.PI / 180;
+            double longitude = contact.getUserHomeLocation().getCoordinates().longitude * Math.PI / 180;
+
+            x += Math.cos(latitude) * Math.cos(longitude);
+            y += Math.cos(latitude) * Math.sin(longitude);
+            z += Math.sin(latitude);
+            total++;
+        }
+
+        x = x / total;
+        y = y / total;
+        z = z / total;
+
+        double centralLongitude = Math.atan2(y, x);
+        double centralSquareRoot = Math.sqrt(x * x + y * y);
+        double centralLatitude = Math.atan2(z, centralSquareRoot);
+
+        this.CenterLocation = new LatLng(centralLatitude * 180 / Math.PI, centralLongitude * 180 / Math.PI);
+    }
+
+    public LatLng getCenterLocation()
+    {
+        if (this.CenterLocation == null) setCenterLocation();
+        return CenterLocation;
+    }
+
 
     public void save(SharedPreferences sharedPreferences, String key) throws JSONException {
         SharedPreferences.Editor editor = sharedPreferences.edit();
