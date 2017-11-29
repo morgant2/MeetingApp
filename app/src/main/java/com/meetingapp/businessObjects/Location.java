@@ -1,4 +1,4 @@
-package com.meetingapp.BusinessObjects;
+package com.meetingapp.businessObjects;
 
 import com.google.android.gms.maps.model.LatLng;
 

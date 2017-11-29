@@ -4,6 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.meetingapp.Activities.ContactsActivity">
+    tools:context="com.meetingapp.activities.ContactsActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This is the contacts activity"/>
 
 </android.support.constraint.ConstraintLayout>

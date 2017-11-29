@@ -1,4 +1,4 @@
-package com.meetingapp.Activities;
+package com.meetingapp.activities;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

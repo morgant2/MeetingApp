@@ -1,4 +1,4 @@
-package com.meetingapp.Activities;
+package com.meetingapp.activities;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -19,11 +19,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
-import com.meetingapp.BusinessObjects.Contact;
-import com.meetingapp.BusinessObjects.Meeting;
+import com.meetingapp.businessObjects.Contact;
+import com.meetingapp.businessObjects.Meeting;
 import com.meetingapp.R;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;

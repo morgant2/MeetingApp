@@ -1,4 +1,4 @@
-package com.meetingapp.Activities;
+package com.meetingapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,15 +17,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.meetingapp.BusinessObjects.Location;
-import com.meetingapp.BusinessObjects.Contact;
+import com.meetingapp.businessObjects.Location;
+import com.meetingapp.businessObjects.Contact;
 import com.meetingapp.R;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class CreateContactActivity extends AppCompatActivity {
@@ -47,7 +45,7 @@ public class CreateContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_new_user);
+        setContentView(R.layout.activity_create_contact);
 
         btnCreateUser = (Button) findViewById(R.id.btnCreateButton);
 

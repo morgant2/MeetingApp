@@ -1,15 +1,15 @@
-package com.meetingapp.Activities;
+package com.meetingapp.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.meetingapp.R;
 
-public class ScheduledMeetingsActivity extends AppCompatActivity {
+public class ContactsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scheduled_meetings);
+        setContentView(R.layout.activity_contacts);
     }
 }

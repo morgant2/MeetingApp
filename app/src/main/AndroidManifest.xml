@@ -8,6 +8,8 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -16,17 +18,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.CreateMeetingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.ContactsActivity" />
-        <activity android:name=".Activities.CreateContactActivity" />
-        <activity android:name=".Activities.ScheduledMeetingsActivity" />
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.ContactsActivity" />
+        <activity android:name=".activities.CreateContactActivity" />
+        <activity android:name=".activities.ScheduledMeetingsActivity" />
+        <activity android:name=".activities.BaseActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -40,12 +43,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".Activities.MapsActivity"
+            android:name=".activities.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Activities.CreateMeetingActivity" />
-        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-        <uses-permission android:name="android.permission.INTERNET"/>
-        <!--<activity android:name=".Activities.BaseActivity"></activity>-->
+
     </application>
 
 </manifest>
