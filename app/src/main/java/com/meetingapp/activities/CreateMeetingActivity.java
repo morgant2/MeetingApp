@@ -40,7 +40,7 @@ public class CreateMeetingActivity extends BaseActivity {
     Calendar endDate;
     Calendar date;
     Context context;
-    ArrayList<Contact> possibleContacts;
+    ArrayList<Contact> possibleContacts = new ArrayList<>();
     ArrayList<Contact> actualContacts;
 
     public void showDateTimePicker(final boolean isStartTime) {
