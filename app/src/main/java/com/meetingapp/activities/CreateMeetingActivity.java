@@ -34,7 +34,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CreateMeetingActivity extends AppCompatActivity {
+public class CreateMeetingActivity extends BaseActivity {
 
     Calendar startDate;
     Calendar endDate;
@@ -83,7 +83,12 @@ public class CreateMeetingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_meeting);
+        /*
+          We will not use setContentView in this activty
+         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
+         Adding our layout to parent class frame layout.
+         */
+        getLayoutInflater().inflate(R.layout.activity_create_meeting, mFrameLayout);
 
         Button btnAddAttendee = (Button) findViewById(R.id.btnAddAttendee);
         Button btnSetStartTime = (Button) findViewById(R.id.btnStartTime);
