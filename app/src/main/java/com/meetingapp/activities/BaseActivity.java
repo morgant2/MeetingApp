@@ -103,6 +103,9 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
             case R.id.menu_view_contacts:
                 startActivity(new Intent(this, ContactsActivity.class));
                 break;
+            case R.id.menu_create_contact:
+                startActivity(new Intent(this, CreateContactActivity.class));
+                break;
         }
         return false;
     }
