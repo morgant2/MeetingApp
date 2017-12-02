@@ -105,7 +105,7 @@ public class CreateContactActivity extends AppCompatActivity {
                 et.addTextChangedListener(new TextWatcher() {
                     @Override
                     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        toggleButtonEnabledState();
+
                     }
 
                     @Override
@@ -115,7 +115,7 @@ public class CreateContactActivity extends AppCompatActivity {
 
                     @Override
                     public void afterTextChanged(Editable editable) {
-                        toggleButtonEnabledState();
+
                     }
                 });
             }
@@ -207,12 +207,14 @@ public class CreateContactActivity extends AppCompatActivity {
             if (address == null) {
                 return null;
             }
-            Address location = address.get(0);
-            location.getLatitude();
-            location.getLongitude();
+            if(address.size() > 0)
+            {
+                Address location = address.get(0);
+                location.getLatitude();
+                location.getLongitude();
 
-            p1 = new LatLng(location.getLatitude(), location.getLongitude() );
-
+                p1 = new LatLng(location.getLatitude(), location.getLongitude() );
+            }
         } catch (IOException ex) {
 
             ex.printStackTrace();
