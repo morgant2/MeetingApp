@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- brand color: orange -->
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#F57C00</color>
+    <color name="colorPrimaryLight">#FFE0B2</color>
+    <!-- accent color: red -->
+    <color name="colorAccent">#FF5252</color>
+    <!-- text color: white -->
+    <color name="textColorPrimary">#DE000000</color>
+    <color name="textColorSecondary">#9E9E9E</color>
+    <!-- inverse text color: 87% black -->
+    <color name="textColorPrimaryInverse">#f9f9f9</color>
+    <color name="textColorSecondaryInverse">#9E9E9E</color>
+
+    <color name="colorPrimaryInverse">#FF9800</color>
+    <color name="colorPrimaryDarkInverse">#F57C00</color>
+    <color name="colorAccentInverse">#FFE0B2</color>
 </resources>
