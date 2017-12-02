@@ -26,7 +26,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.List;
 
-public class CreateContactActivity extends AppCompatActivity {
+public class CreateContactActivity extends BaseActivity {
 
     private Contact newContact = null;
     Location userLocation = null;
@@ -45,7 +45,12 @@ public class CreateContactActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_contact);
+        /*
+          We will not use setContentView in this activty
+         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
+         Adding our layout to parent class frame layout.
+         */
+        getLayoutInflater().inflate(R.layout.activity_create_contact, mFrameLayout);
 
         btnCreateUser = (Button) findViewById(R.id.btnCreateButton);
 
