@@ -76,7 +76,6 @@
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/spinAddAttendee"
-                    android:entries="@array/listOfUsers"
                     android:prompt="@string/userPrompt"/>
                 <Button
                     android:layout_width="match_parent"
@@ -88,8 +87,7 @@
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="234dp"
-                android:id="@+id/lvAttendees"
-                android:entries="@array/listOfUsers">
+                android:id="@+id/lvAttendees">
             </ListView>
         </LinearLayout>
     </ScrollView>

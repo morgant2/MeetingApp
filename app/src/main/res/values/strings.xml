@@ -26,12 +26,6 @@
     <string name="menu_view_contacts">Contacts</string>
     <string name="menu_view_profile">Profile</string>
     <string name="contacts_key">contacts</string>
-    <string-array name="listOfUsers">
-        <item>morgant2</item>
-        <item>someuser123</item>
-        <item>anotheruser</item>
-        <item>anonymous</item>
-    </string-array>
     <string-array name="listOfStates">
         <item>Alabama</item>
         <item>Alaska</item>
