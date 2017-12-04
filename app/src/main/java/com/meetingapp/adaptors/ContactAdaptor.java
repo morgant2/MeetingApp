@@ -13,15 +13,24 @@ import com.meetingapp.businessObjects.Contact;
 import java.util.ArrayList;
 
 /**
- * Created by Graeham on 12/3/2017.
+ * An custom adaptor class to allow displaying custom layout in listview item
+ * refer to https://guides.codepath.com/android/Using-an-ArrayAdapter-with-ListView
  */
 
 public class ContactAdaptor extends ArrayAdapter<Contact>{
 
-    public ContactAdaptor(Context context, ArrayList<Contact> users) {
-        super(context, 0, users);
+    /**
+     * Public constructor
+     * @param context - the activity context
+     * @param contacts - an arraylist of contacts to be adapted
+     */
+    public ContactAdaptor(Context context, ArrayList<Contact> contacts) {
+        super(context, 0, contacts);
     }
 
+    /**
+     * Override the getView method of ArrayAdaptor in order to display a custom listview item
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -33,7 +42,7 @@ public class ContactAdaptor extends ArrayAdapter<Contact>{
         // Lookup view for data population
         TextView contactNameTV = (TextView) convertView.findViewById(R.id.contactName);
         TextView contactAddressTV = (TextView) convertView.findViewById(R.id.contactAddress);
-        // Populate the data into the template view using the data object
+        // Populate the data into the template view
         contactNameTV.setText(contact.getLastFirstName());
         contactAddressTV.setText(contact.getUserHomeLocation().getFullAddress());
         // Return the completed view to render on screen

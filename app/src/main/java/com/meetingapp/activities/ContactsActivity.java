@@ -1,7 +1,6 @@
 package com.meetingapp.activities;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -19,7 +18,8 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ContactsActivity extends BaseActivity {
     ArrayList<Contact> contactList = new ArrayList<>();
@@ -42,6 +42,11 @@ public class ContactsActivity extends BaseActivity {
             e.printStackTrace();
         }
         // alphabetize
+        Collections.sort(contactList, new Comparator<Contact>() {
+            public int compare(Contact c1, Contact c2) {
+                return c1.getLastFirstName().compareTo(c2.getLastFirstName());
+            }
+        });
 
         // get an adapter for the contact list
         ArrayAdapter contactsAdapter = new ContactAdaptor(this, contactList);
@@ -51,6 +56,9 @@ public class ContactsActivity extends BaseActivity {
         contactListView.setAdapter(contactsAdapter);
     }
 
+    /**
+     * method to read contacts from SharedPreferences into ArrayList for populating ListvVew
+     */
     public void setContacts() throws JSONException {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.enableComplexMapKeySerialization().create();
