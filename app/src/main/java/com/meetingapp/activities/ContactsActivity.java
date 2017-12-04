@@ -1,7 +1,10 @@
 package com.meetingapp.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -55,6 +58,27 @@ public class ContactsActivity extends BaseActivity {
         //Set the adapter to adapt the listview
         contactListView.setAdapter(contactsAdapter);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.menu_contacts, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.menu_create_contact:
+                startActivity(new Intent(getApplicationContext(), CreateContactActivity.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 
     /**
      * method to read contacts from SharedPreferences into ArrayList for populating ListvVew

@@ -7,13 +7,19 @@ import android.os.Bundle;
 import com.meetingapp.R;
 import com.meetingapp.fragments.SettingsFragment;
 
-public class SettingsActivity extends AppCompatActivity {
+public class SettingsActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+//        setContentView(R.layout.activity_settings);
+        /*
+          We will not use setContentView in this activty
+         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
+         Adding our layout to parent class frame layout.
+         */
+        getLayoutInflater().inflate(R.layout.activity_settings, mFrameLayout);
+        getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
     }
 
     @Override

@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,11 +27,12 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.List;
 
-public class CreateContactActivity extends BaseActivity {
+public class CreateContactActivity extends AppCompatActivity {
 
     private Contact newContact = null;
     Location userLocation = null;
 
+    private Toolbar toolbar;
     private View etFirstName = null;
     private View etLastName = null;
     private View etUsername = null;
@@ -45,14 +47,19 @@ public class CreateContactActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-          We will not use setContentView in this activty
-         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
-         Adding our layout to parent class frame layout.
-         */
-        getLayoutInflater().inflate(R.layout.activity_create_contact, mFrameLayout);
+        setContentView(R.layout.activity_create_contact);
+//        /*
+//          We will not use setContentView in this activty
+//         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
+//         Adding our layout to parent class frame layout.
+//         */
+//        getLayoutInflater().inflate(R.layout.activity_create_contact, mFrameLayout);
 
         btnCreateUser = (Button) findViewById(R.id.btnCreateButton);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar_create_contacts);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setETFields();
         createTextEventListener();
