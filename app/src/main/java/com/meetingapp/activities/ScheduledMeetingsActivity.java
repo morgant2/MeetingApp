@@ -46,11 +46,11 @@ public class ScheduledMeetingsActivity extends BaseActivity {
         }
 
         // get an adapter for the contact list
-        ArrayAdapter contactsAdapter = new MeetingAdaptor(this, meetingsList);
+        ArrayAdapter meetingAdaptor = new MeetingAdaptor(this, meetingsList);
         // get the listview from the layout
         ListView meetingListView = (ListView) findViewById(R.id.listViewMeetings);
         //Set the adapter to adapt the listview
-        meetingListView.setAdapter(contactsAdapter);
+        meetingListView.setAdapter(meetingAdaptor);
 //        ListView list = (ListView) findViewById(R.id.listViewMeetings);
 //        list.setAdapter(new ArrayAdapter<Meeting>(this, android.R.layout.simple_list_item_1, meetingsList));
 
