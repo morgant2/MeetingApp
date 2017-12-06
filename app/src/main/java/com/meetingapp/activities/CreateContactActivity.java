@@ -1,11 +1,14 @@
 package com.meetingapp.activities;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -63,11 +66,12 @@ public class CreateContactActivity extends AppCompatActivity {
         setETFields();
         createTextEventListener();
 
-        btnCreateUser.setEnabled(false);
+        btnCreateUser.setEnabled(true);
+
         btnCreateUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isFormFilled())
+                if(isFormFilled() && isValidLocation())
                 {
 
                     userLocation = new Location(((EditText)etAddress).getText().toString(),
@@ -97,6 +101,10 @@ public class CreateContactActivity extends AppCompatActivity {
                         e.printStackTrace();
                         Toast.makeText(getApplicationContext(), "Unable to save new contact.", Toast.LENGTH_LONG).show();
                     }
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Unable to save new contact. Something went wrong.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -156,7 +164,7 @@ public class CreateContactActivity extends AppCompatActivity {
 
                     @Override
                     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        toggleButtonEnabledState();
+//                        toggleButtonEnabledState();
                     }
 
                     @Override
@@ -171,12 +179,12 @@ public class CreateContactActivity extends AppCompatActivity {
                 spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        toggleButtonEnabledState();
+//                        toggleButtonEnabledState();
                     }
 
                     @Override
                     public void onNothingSelected(AdapterView<?> adapterView) {
-                        toggleButtonEnabledState();
+//                        toggleButtonEnabledState();
                     }
                 });
             }
@@ -185,14 +193,19 @@ public class CreateContactActivity extends AppCompatActivity {
 
     private void toggleButtonEnabledState() {
         boolean setEnabled = false;
-        if(isFormFilled())
+
+        if(((EditText)etZipCode).getText().length() == 5)
         {
-            //Do not want to run this method everytime a user types
-            if(isValidLocation())
+            if(isFormFilled())
             {
-                setEnabled = true;
+                //Do not want to run this method everytime a user types
+                if(isValidLocation())
+                {
+                    setEnabled = true;
+                }
             }
         }
+
         btnCreateUser.setEnabled(setEnabled);
     }
 
