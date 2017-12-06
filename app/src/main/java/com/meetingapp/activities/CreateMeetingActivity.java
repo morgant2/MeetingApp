@@ -43,6 +43,11 @@ public class CreateMeetingActivity extends BaseActivity {
     ArrayList<Contact> possibleContacts = new ArrayList<>();
     ArrayList<Contact> actualContacts;
 
+    public CreateMeetingActivity() {
+
+    }
+
+
     public void showDateTimePicker(final boolean isStartTime) {
         final Calendar currentDate = Calendar.getInstance();
         date = Calendar.getInstance();
@@ -245,6 +250,7 @@ public class CreateMeetingActivity extends BaseActivity {
 
         for(int i = 0; i < jsonArray.length(); i++)
         {
+
             possibleContacts.add((Contact) gson.fromJson(jsonArray.get(i).toString(), type));
         }
 

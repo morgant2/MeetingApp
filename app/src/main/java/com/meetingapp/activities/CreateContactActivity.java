@@ -81,7 +81,10 @@ public class CreateContactActivity extends AppCompatActivity {
                             ((EditText)etUsername).getText().toString(),
                             userLocation);
 
-                    userLocation.setCoordinates(getLocation(getApplicationContext(), userLocation));
+
+                    //userLocation.setCoordinates(getLocation(getApplicationContext(), userLocation)); //TODO: DO I need this anymore?
+                    userLocation.convertAddressToGeoLocation();
+
 
                     try {
                         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.contacts_key), Context.MODE_PRIVATE);
