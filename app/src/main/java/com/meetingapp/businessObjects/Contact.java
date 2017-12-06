@@ -24,10 +24,6 @@ public class Contact
         this.UserHomeLocation = location;
     }
 
-    public Contact() {
-
-    }
-
     public String getFirstName(){
         return this.FirstName;
     }

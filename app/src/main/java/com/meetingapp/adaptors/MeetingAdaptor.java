@@ -46,10 +46,10 @@ public class MeetingAdaptor extends ArrayAdapter<Meeting> {
         meetingTitleTV.setText(meeting.getSubject());
         // This is not returning a correct string right now, showing LatLng instead of address
 
-        // meetingLocationTV.setText(meeting.getMeetingLocation().getFullAddress());
+        meetingLocationTV.setText(meeting.getMeetingLocation().getFullAddress());
         // Return the completed view to render on screen
 
-        meetingLocationTV.setText(meeting.getSubject());
+        //meetingLocationTV.setText(meeting.getSubject());
         return convertView;
     }
 

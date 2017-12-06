@@ -71,7 +71,7 @@ public class Meeting
     }
 
     //calculation based off of https://stackoverflow.com/questions/6671183/calculate-the-center-point-of-multiple-latitude-longitude-coordinate-pairs
-    private void setCenterLocation()
+    public void setCenterLocation()
     {
         double x = 0;
         double y = 0;

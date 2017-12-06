@@ -4,6 +4,8 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,12 +22,16 @@ import android.widget.Toast;
 
 import com.google.gson.GsonBuilder;
 import com.meetingapp.businessObjects.Contact;
+import com.meetingapp.businessObjects.Location;
 import com.meetingapp.businessObjects.Meeting;
 import com.meetingapp.R;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -42,12 +48,7 @@ public class CreateMeetingActivity extends BaseActivity {
     Context context;
     ArrayList<Contact> possibleContacts = new ArrayList<>();
     ArrayList<Contact> actualContacts;
-
-    public CreateMeetingActivity() {
-
-    }
-
-
+    
     public void showDateTimePicker(final boolean isStartTime) {
         final Calendar currentDate = Calendar.getInstance();
         date = Calendar.getInstance();
@@ -126,6 +127,8 @@ public class CreateMeetingActivity extends BaseActivity {
                 newMeeting.setStartTime(startDate.getTime());
                 newMeeting.setEndTime(endDate.getTime());
                 newMeeting.setContactsAttending(actualContacts);
+                newMeeting.setCenterLocation();
+                newMeeting = getAddressFromGeoLocation(newMeeting);
 
                 try {
                     newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
@@ -259,6 +262,37 @@ public class CreateMeetingActivity extends BaseActivity {
             throw new JSONException("No possibleContacts");
         }
 
+    }
+
+    private Meeting getAddressFromGeoLocation(Meeting meeting){
+            if(meeting.getCenterLocation() == null) {
+                //TODO: handle if coordinates are empty
+            } else {
+                try {
+                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                    List<Address> addresses;
+                    double lat = meeting.getCenterLocation().latitude;
+                    double lon = meeting.getCenterLocation().longitude;
+                    addresses = geocoder.getFromLocation(lat, lon, 1);
+
+                    if(addresses != null && addresses.size() > 0) {
+
+                        String address = addresses.get(0).getAddressLine(0);
+                        String city = addresses.get(0).getLocality();
+                        String state = addresses.get(0).getAdminArea();
+                        String zipCode = addresses.get(0).getPostalCode();
+
+                        Location location = new Location(address, city, state, zipCode);
+                        meeting.setMeetingLocation(location);
+                    }
+                }catch(IOException ioe) {
+                    ioe.printStackTrace();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        return  meeting;
     }
 
 
