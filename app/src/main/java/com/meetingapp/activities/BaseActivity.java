@@ -24,7 +24,7 @@ import com.meetingapp.R;
  * We will add our child activity to the frame layout;
  * We will add our navigation drawer to the NavigationView
  */
-public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener{
+abstract class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuItemClickListener{
 
     /** mFrameLayout : parent layout for the child activity layout.
      *  protected - so that child activity can access
@@ -36,6 +36,10 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
      */
 //    todo: determine best scope qualifier
     protected NavigationView mNavigationDrawer;
+    /**
+     * mNavigationDrawer : NavigationView to add navigation drawer to
+     */
+    protected Toolbar myToolbar;
     /**
      * mDrawerLayout : BaseActivity's root layout.
      */
@@ -62,7 +66,8 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar_base);
+
+        myToolbar = (Toolbar) findViewById(R.id.toolbar_base);
         setSupportActionBar(myToolbar);
         // enable ActionBar app icon to behave as action to toggle nav drawer
         // need to be using custom toolbar to make this work properly
