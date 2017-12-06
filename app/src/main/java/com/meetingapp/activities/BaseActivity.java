@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.meetingapp.R;
@@ -94,10 +95,6 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
         mDrawerLayout.closeDrawer(mNavigationDrawer);
 
         switch (item.getItemId()) {
-
-//            case R.id.menu_view_profile:
-//                startActivity(new Intent(this, ProfileActivity.class));
-//                break;
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
@@ -110,19 +107,9 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
             case R.id.menu_view_contacts:
                 startActivity(new Intent(this, ContactsActivity.class));
                 break;
-//            case R.id.menu_create_contact:
-//                startActivity(new Intent(this, CreateContactActivity.class));
-//                break;
         }
         return false;
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu)
-//    {
-//        getMenuInflater().inflate(R.menu.preferences, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -130,12 +117,6 @@ public class BaseActivity extends AppCompatActivity implements MenuItem.OnMenuIt
         if(mDrawerToggle.onOptionsItemSelected(item)){
             return true;
         }
-//        switch(item.getItemId())
-//        {
-//            case R.id.menu_settings:
-//                startActivity(new Intent(getApplicationContext(), SettingsActivity.class));
-//                break;
-//        }
 
         return super.onOptionsItemSelected(item);
     }

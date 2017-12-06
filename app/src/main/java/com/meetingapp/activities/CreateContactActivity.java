@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -46,14 +47,11 @@ public class CreateContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("pref_dark_theme", false)) {
+            setTheme(R.style.AppTheme_Dark);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_contact);
-//        /*
-//          We will not use setContentView in this activty
-//         Rather than we will use layout inflater to add view in FrameLayout of our base activity layout
-//         Adding our layout to parent class frame layout.
-//         */
-//        getLayoutInflater().inflate(R.layout.activity_create_contact, mFrameLayout);
 
         btnCreateUser = (Button) findViewById(R.id.btnCreateButton);
 

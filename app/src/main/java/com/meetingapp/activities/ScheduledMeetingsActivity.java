@@ -12,6 +12,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.meetingapp.R;
+import com.meetingapp.adaptors.ContactAdaptor;
+import com.meetingapp.adaptors.MeetingAdaptor;
 import com.meetingapp.businessObjects.Meeting;
 
 import org.json.JSONArray;
@@ -43,8 +45,14 @@ public class ScheduledMeetingsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        ListView list = (ListView) findViewById(R.id.listViewMeetings);
-        list.setAdapter(new ArrayAdapter<Meeting>(this, android.R.layout.simple_list_item_1, meetingsList));
+        // get an adapter for the contact list
+        ArrayAdapter meetingAdaptor = new MeetingAdaptor(this, meetingsList);
+        // get the listview from the layout
+        ListView meetingListView = (ListView) findViewById(R.id.listViewMeetings);
+        //Set the adapter to adapt the listview
+        meetingListView.setAdapter(meetingAdaptor);
+//        ListView list = (ListView) findViewById(R.id.listViewMeetings);
+//        list.setAdapter(new ArrayAdapter<Meeting>(this, android.R.layout.simple_list_item_1, meetingsList));
 
     }
 
