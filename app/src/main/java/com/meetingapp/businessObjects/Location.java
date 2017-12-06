@@ -1,6 +1,7 @@
 package com.meetingapp.businessObjects;
 
 
+import android.app.Application;
 import android.location.Geocoder;
 import android.location.Address;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class Location extends AppCompatActivity
+public class Location
 {
     private String Address;
     private String City;
@@ -57,7 +58,7 @@ public class Location extends AppCompatActivity
     }
 
     //Get the longitude and latitude for the address
-    public void convertAddressToGeoLocation() {
+   /* public void convertAddressToGeoLocation() {
         if(this.Address == null || this.City == null || this.State == null || this.ZipCode == null) {
             //TODO: handle if any part of the address is empty
         } else {
@@ -108,5 +109,5 @@ public class Location extends AppCompatActivity
             }
 
         }
-    }
+    }*/
 }

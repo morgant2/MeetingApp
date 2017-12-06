@@ -27,6 +27,7 @@ import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class CreateContactActivity extends AppCompatActivity {
 
@@ -81,7 +82,9 @@ public class CreateContactActivity extends AppCompatActivity {
 
 
                     //userLocation.setCoordinates(getLocation(getApplicationContext(), userLocation)); //TODO: DO I need this anymore?
-                    userLocation.convertAddressToGeoLocation();
+                   //userLocation.convertAddressToGeoLocation();
+
+                   getGeoLocationFromAddress();
 
 
                     try {
@@ -97,6 +100,36 @@ public class CreateContactActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void getGeoLocationFromAddress() {
+        //Get the longitude and latitude for the address
+
+        if(userLocation.getAddress() == null || userLocation.getCity() == null || userLocation.getState() == null || userLocation.getZipCode() == null) {
+            //TODO: handle if any part of the address is empty
+        } else {
+            try {
+                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                List<Address> addresses;
+                addresses = geocoder.getFromLocationName(userLocation.getFullAddress(), 1);
+                while(addresses.size() == 0) {
+                    addresses = geocoder.getFromLocationName(userLocation.getFullAddress(), 1);
+                }
+                if(addresses != null && addresses.size() > 0) {
+                    double lat = addresses.get(0).getLatitude();
+                    double lon = addresses.get(0).getLongitude();
+
+                    LatLng coords = new LatLng(lat,lon);
+                    userLocation.setCoordinates(coords);
+
+                }
+            } catch(IOException ioe) {
+                ioe.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     private boolean isValidLocation() {
