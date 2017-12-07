@@ -277,7 +277,10 @@ public class CreateMeetingActivity extends BaseActivity {
 
                     if(addresses != null && addresses.size() > 0) {
 
-                        String address = addresses.get(0).getAddressLine(0);
+                        //String address = addresses.get(0).getAddressLine(0);
+                        String address = addresses.get(0).getFeatureName();
+                        String road = addresses.get(0).getThoroughfare();
+                        address = address + " " + road;
                         String city = addresses.get(0).getLocality();
                         String state = addresses.get(0).getAdminArea();
                         String zipCode = addresses.get(0).getPostalCode();

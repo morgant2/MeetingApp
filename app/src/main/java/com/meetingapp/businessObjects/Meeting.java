@@ -1,6 +1,8 @@
 package com.meetingapp.businessObjects;
 
 import android.content.SharedPreferences;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
@@ -9,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -21,6 +24,10 @@ public class Meeting
     private Location MeetingLocation;
     private ArrayList<Contact> contactsAttending;
     private LatLng CenterLocation;
+
+   /* public Meeting() {
+
+    }*/
 
     public String getSubject() {
         return Subject;
@@ -146,5 +153,20 @@ public class Meeting
 
         return msg;
     }
+/*
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeString(this.Subject);
+        out.writeString(this.Description);
+        out.writeString(this.getStartTime().toString());
+        out.writeString(this.getEndTime().toString());
+        out.writeString(this.getMeetingLocation().getFullAddress());
+        out.writeArray(this.contactsAttending);
+    }*/
 }
 

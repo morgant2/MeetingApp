@@ -1,6 +1,7 @@
 package com.meetingapp.adaptors;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.meetingapp.R;
+import com.meetingapp.activities.CreateMeetingActivity;
+import com.meetingapp.activities.ScheduledMeetingsActivity;
 import com.meetingapp.businessObjects.Meeting;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class MeetingAdaptor extends ArrayAdapter<Meeting> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Meeting meeting = getItem(position);
+        final Meeting meeting = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_meeting, parent, false);
@@ -50,6 +53,16 @@ public class MeetingAdaptor extends ArrayAdapter<Meeting> {
         // Return the completed view to render on screen
 
         //meetingLocationTV.setText(meeting.getSubject());
+
+        /*convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detailMeetingIntent = new Intent(context, ScheduledMeetingsActivity.class);
+                detailMeetingIntent.putExtra("Meeting", meeting);
+                context.startActivity(detailMeetingIntent);
+            }
+        });*/
+
         return convertView;
     }
 
