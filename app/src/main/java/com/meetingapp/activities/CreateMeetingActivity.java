@@ -122,27 +122,35 @@ public class CreateMeetingActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Meeting newMeeting = new Meeting();
-                newMeeting.setSubject(((EditText) findViewById(R.id.subject)).getText().toString());
-                newMeeting.setStartTime(startDate.getTime());
-                newMeeting.setEndTime(endDate.getTime());
-                newMeeting.setContactsAttending(actualContacts);
-                newMeeting.setCenterLocation();
-                newMeeting = getAddressFromGeoLocation(newMeeting);
+                if(isFormValid())
+                {
+                    Meeting newMeeting = new Meeting();
+                    newMeeting.setSubject(((EditText) findViewById(R.id.subject)).getText().toString());
+                    newMeeting.setStartTime(startDate.getTime());
+                    newMeeting.setEndTime(endDate.getTime());
+                    newMeeting.setContactsAttending(actualContacts);
+                    newMeeting.setCenterLocation();
+                    newMeeting = getAddressFromGeoLocation(newMeeting);
 
-                try {
-                    newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
+                    try {
+                        newMeeting.save(getSharedPreferences(getString(R.string.meetings_key), Context.MODE_PRIVATE), getString(R.string.meetings_key));
 
-                    //TODO: Bug - Send Email and Create Meeting Intents are Out of Sequence
-                    sendEmail(newMeeting);
+                        //TODO: Bug - Send Email and Create Meeting Intents are Out of Sequence
+                        sendEmail(newMeeting);
 
-                    Intent scheduledMeetingsIntent = new Intent(CreateMeetingActivity.this, ScheduledMeetingsActivity.class);
-                    CreateMeetingActivity.this.startActivity(scheduledMeetingsIntent);
+                        Intent scheduledMeetingsIntent = new Intent(CreateMeetingActivity.this, ScheduledMeetingsActivity.class);
+                        CreateMeetingActivity.this.startActivity(scheduledMeetingsIntent);
 
-                } catch (JSONException e) {
-                    Toast.makeText(getApplicationContext(), "Unable to save meeting!", Toast.LENGTH_LONG);
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), "Unable to save meeting!", Toast.LENGTH_LONG).show();
+                        e.printStackTrace();
+                    }
                 }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Unable to save meeting. Make sure the form is filled!", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
 
@@ -169,6 +177,17 @@ public class CreateMeetingActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private boolean isFormValid() {
+        boolean isValid = true;
+
+        if(((EditText) findViewById(R.id.subject)).getText().toString().length() < 1 || startDate.toString().length() < 1 ||
+                endDate.toString().length() < 1 || actualContacts.size() == 0)
+        {
+            isValid = false;
+        }
+        return isValid;
     }
 
     private void sendEmail(Meeting meeting) {
