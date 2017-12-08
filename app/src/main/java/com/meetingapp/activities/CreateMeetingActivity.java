@@ -150,7 +150,6 @@ public class CreateMeetingActivity extends BaseActivity {
                 {
                     Toast.makeText(getApplicationContext(), "Unable to save meeting. Make sure the form is filled!", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
