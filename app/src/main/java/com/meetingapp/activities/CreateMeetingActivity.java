@@ -194,15 +194,19 @@ public class CreateMeetingActivity extends BaseActivity {
         ListView lvAttendees = (ListView) findViewById(R.id.lvAttendees);
         Spinner spinAddAttendee = (Spinner) findViewById(R.id.spinAddAttendee);
 
-        int selectedItem = spinAddAttendee.getSelectedItemPosition();
+        if(spinAddAttendee.getCount() > 0)
+        {
+            int selectedItem = spinAddAttendee.getSelectedItemPosition();
 
-        if(actualContacts == null) actualContacts = new ArrayList<Contact>();
+            if(actualContacts == null) actualContacts = new ArrayList<Contact>();
 
-        actualContacts.add((Contact) possibleContacts.get(selectedItem));
-        possibleContacts.remove(selectedItem);
+            actualContacts.add((Contact) possibleContacts.get(selectedItem));
+            possibleContacts.remove(selectedItem);
 
-        spinAddAttendee.setAdapter(getArrayAdapter(R.layout.support_simple_spinner_dropdown_item, getLastFirstNameArray(possibleContacts)));
-        lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
+            spinAddAttendee.setAdapter(getArrayAdapter(R.layout.support_simple_spinner_dropdown_item, getLastFirstNameArray(possibleContacts)));
+            lvAttendees.setAdapter(getArrayAdapter(android.R.layout.simple_list_item_1, getLastFirstNameArray(actualContacts)));
+        }
+
     }
 
     private String constructMeetingBody(Meeting meeting)
